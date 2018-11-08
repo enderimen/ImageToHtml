@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-  <head>
+<head>
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -11,88 +11,138 @@
     <title>ITH -Image to HTML</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="{{url_for ('static', filename = 'vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
+    <link href="{{ url_for ('static', filename = 'vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
 
     <!-- Custom Fonts -->
-    <link href="{{url_for ('static', filename = 'vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
-    <link href="{{ url_for ('static', filename = 'vendor/simple-line-icons/css/simple-line-icons.css')}}" rel="stylesheet">
+    <link href="{{ url_for ('static', filename = 'vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet"
+          type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic"
+          rel="stylesheet" type="text/css">
+    <link href="{{ url_for ('static', filename = 'vendor/simple-line-icons/css/simple-line-icons.css') }}"
+          rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="{{url_for ('static', filename = 'css/stylish-portfolio.min.css')}}" rel="stylesheet">
+    <link href="{{ url_for ('static', filename = 'css/stylish-portfolio.min.css') }}" rel="stylesheet">
+    <style>
+        .containerr {
+            height: {{ height }}px;
+            width: {{ width }}px;
+            display: flex;
+            flex-wrap: wrap;
+            background-color: blue;
+        }
 
-  </head>
+        .pixel {
+            height: 1px;
+            width: 1px;
+        }
+    </style>
+</head>
 
-  <body id="page-top">
+<body id="page-top">
 
-    <!-- Navigation -->
-    <a class="menu-toggle rounded" href="#">
-      <i class="fas fa-bars"></i>
-    </a>
-    <nav id="sidebar-wrapper">
-      <ul class="sidebar-nav">
+<!-- Navigation -->
+
+<a class="menu-toggle rounded" href="#">
+    <i class="fas fa-bars"></i>
+</a>
+<nav id="sidebar-wrapper">
+    <ul class="sidebar-nav">
         <li class="sidebar-brand">
-          <a class="js-scroll-trigger" href="#page-top">ITH</a>
+            <a class="js-scroll-trigger" href="#page-top">ITH</a>
         </li>
-      </ul>
-    </nav>
+    </ul>
+</nav>
 
-    <!-- Header -->
-    <header class="masthead d-flex">
-      <div class="container text-center my-auto">
+<!-- Header -->
+<header class="masthead d-flex">
+    <div class="container text-center my-auto">
         <h1 class="mb-1">Image to HTML</h1>
         <h3 class="mb-5">
-          <em>Do you want to convert your photos to html format?</em>
+            <em>Do you want to convert your photos to html format?</em>
         </h3>
         <a class="btn btn-primary btn-xl js-scroll-trigger" type="input" id="upload">Upload Images</a>
 
         <input type="file" id="file" name="" hidden="hidden">
-      </div>
-      <div class="overlay"></div>
-    </header>
 
-    <!-- Footer -->
-    <footer class="footer text-center">
-      <div class="container">
+        <!-- Button trigger modal -->
+        <a id="modal" data-toggle="modal" data-target="#exampleModalCenter"></a>
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+             aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="overlay"></div>
+</header>
+
+<!-- Footer -->
+<footer class="footer text-center">
+    <div class="containerr">
+        {% for color_x in range(0, width) %}
+            {% for color_y in range(0, height) %}
+                <div class="pixel" style="background-color: rgb{{ colorArray[color_x][color_y] }}"></div>
+            {% endfor %}
+         {% endfor %}
+    </div>
+    <div class="container">
         <ul class="list-inline mb-5">
-          <li class="list-inline-item">
-            <a class="social-link rounded-circle text-white mr-3" href="#">
-              <i class="icon-social-facebook"></i>
-            </a>
-          </li>
-          <li class="list-inline-item">
-            <a class="social-link rounded-circle text-white mr-3" href="#">
-              <i class="icon-social-twitter"></i>
-            </a>
-          </li>
-          <li class="list-inline-item">
-            <a class="social-link rounded-circle text-white" href="#">
-              <i class="icon-social-github"></i>
-            </a>
-          </li>
+            <li class="list-inline-item">
+                <a class="social-link rounded-circle text-white mr-3" href="#">
+                    <i class="icon-social-facebook"></i>
+                </a>
+            </li>
+            <li class="list-inline-item">
+                <a class="social-link rounded-circle text-white mr-3" href="#">
+                    <i class="icon-social-twitter"></i>
+                </a>
+            </li>
+            <li class="list-inline-item">
+                <a class="social-link rounded-circle text-white" href="#">
+                    <i class="icon-social-github"></i>
+                </a>
+            </li>
         </ul>
         <p class="text-muted small mb-0">Copyright &copy; enderimen.kim 2018</p>
-      </div>
-    </footer>
+    </div>
+</footer>
 
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded js-scroll-trigger" href="#page-top">
-      <i class="fas fa-angle-up"></i>
-    </a>
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded js-scroll-trigger" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
 
-    <!-- Bootstrap core JavaScript -->
-    <script src="{{url_for ('static', filename = 'vendor/jquery/jquery.min.js')}}"></script>
-    <script src="{{url_for ('static', filename = 'vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+<!-- Bootstrap core JavaScript -->
+<script src="{{ url_for ('static', filename = 'vendor/jquery/jquery.min.js') }}"></script>
+<script src="{{ url_for ('static', filename = 'vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 
-    <!-- Plugin JavaScript -->
-    <script src="{{url_for ('static', filename = 'vendor/jquery-easing/jquery.easing.min.js')}}"></script>
+<!-- Plugin JavaScript -->
+<script src="{{ url_for ('static', filename = 'vendor/jquery-easing/jquery.easing.min.js') }}"></script>
 
-    <!-- Custom scripts for this template -->
-    <script src="{{url_for ('static', filename = 'js/stylish-portfolio.min.js')}}"></script>
+<!-- Custom scripts for this template -->
+<script src="{{ url_for ('static', filename = 'js/stylish-portfolio.min.js') }}"></script>
 
-    <!-- Custom scripts -->
-    <script src="{{url_for ('static', filename = 'js/customize.js')}}"></script>
+<!-- Custom scripts -->
+<script src="{{ url_for ('static', filename = 'js/customize.js') }}"></script>
 
-  </body>
+</body>
 
 </html>
