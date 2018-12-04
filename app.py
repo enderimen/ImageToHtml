@@ -1,5 +1,7 @@
 from flask import Flask, render_template
 from PIL import Image
+from colorutils import Color
+
 import os
 
 app = Flask(__name__)
@@ -15,7 +17,7 @@ def index():
 @app.route('/process')
 def process():
 
-    target = os.path.join(app.config['UPLOAD_FOLDER'], "superfans.png")
+    target = os.path.join(app.config['UPLOAD_FOLDER'], "minnak.jpg")
     im = Image.open(target)  # Can be many different formats.
     width, height = im.size
 
@@ -27,7 +29,8 @@ def process():
     for pixel_x in range(0, width):
         for pixel_y in range(0, height):
             r, g, b = rgb_im.getpixel((pixel_x, pixel_y))
-            colorArray[pixel_x][pixel_y] = r, g, b
+            hexColor = Color((r, g, b))
+            colorArray[pixel_x][pixel_y] = hexColor.hex
 
     return render_template("index.html", width = width, height = height, colorArray = colorArray)
 

@@ -23,23 +23,37 @@
 
     <!-- Custom CSS -->
     <link href="{{ url_for ('static', filename = 'css/stylish-portfolio.min.css') }}" rel="stylesheet">
-    <style>
-        .containerr {
-            height: {{ height }}px;
-            width: {{ width }}px;
-            display: flex;
-            flex-wrap: wrap;
-            background-color: blue;
-        }
 
-        .pixel {
-            height: 1px;
-            width: 1px;
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js" type="text/javascript"></script>
+
+    <script>
+        function initializer(colorArray) {
+
+            var container = document.createElement("div");
+            container.style.display = 'flex';
+            container.style.flexWrap = 'wrap';
+            container.style.width = colorArray.length + 'px';
+            container.style.height = colorArray[0].length + 'px';
+
+            colorArray.forEach(function (line) {
+                line.forEach(function (box) {
+                    var boxDiv = document.createElement('div');
+
+                    boxDiv.style.height = '1px';
+                    boxDiv.style.width  = '1px';
+                    boxDiv.style.backgroundColor = box;
+
+                    container.appendChild(boxDiv);
+                })
+            });
+
+            document.getElementById("footer").appendChild(container);
+
         }
-    </style>
+    </script>
 </head>
 
-<body id="page-top">
+<body id="page-top" onload="initializer({{ colorArray }})">
 
 <!-- Navigation -->
 
@@ -95,14 +109,8 @@
 </header>
 
 <!-- Footer -->
-<footer class="footer text-center">
-    <div class="containerr">
-        {% for color_x in range(0, width) %}
-            {% for color_y in range(0, height) %}
-                <div class="pixel" style="background-color: rgb{{ colorArray[color_x][color_y] }}"></div>
-            {% endfor %}
-         {% endfor %}
-    </div>
+<footer class="footer text-center" id="footer">
+    <div id="canvasX"></div>
     <div class="container">
         <ul class="list-inline mb-5">
             <li class="list-inline-item">
